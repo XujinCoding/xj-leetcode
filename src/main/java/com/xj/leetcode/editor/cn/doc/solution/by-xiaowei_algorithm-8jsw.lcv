@@ -1,0 +1,41 @@
+**解题思路：**
+
+1. 有贪心和数学的成分在里面
+2. 我们统计每个字母出现的次数
+3. 只用管最大的次数记为`max`,假如最大次数为`max`的字母只有一种，记为`1`
+4. 然后插空，我们需要插空`(max - 1) * n` (例如`3`个人中间有`2`个空，这个就不用说了吧，这道题每个空里面插`n`个)，其次因为要算任务时间，每个任务和待命都要一个单位时间，所以再加上最大次数的字母个数，如果我们先不算最后那个，就是`(max - 1) * n + max - 1`，在化简提取公因式得`(max - 1) * (n + 1)`，最后加上最后一个为`(max - 1) * (n + 1) + 1`
+5. 但是如果最大次数出现相同的情况，最大次数相同的字母都会剩下一个，所以我们记录最大次数的同时还要记录出现最大次数的字母有多少种`(count)`，即后面的`1`变为`count`，式子为`(max - 1) * (n + 1) + count`
+6. 如果结果算出来，比数组长度还小，是不可能的，所以我们还需将上述结果与数组长度比较，返回两个中的最大值
+
+**代码如下：**
+
+* java
+
+```java
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        int len = tasks.length;
+        if (n == 0 || len == 1) {
+            return len;
+        }
+        int[] cnt = new int[26];
+        for (char task : tasks) {
+            cnt[task - 'A']++;
+        }
+
+        int count = 0;
+        int max = 0;
+        for (int i = 0; i < 26; i++) {
+            if (cnt[i] > max) {
+                max = cnt[i];
+                count = 1;
+            } else if (cnt[i] == max) {
+                count++;
+            }
+        }
+
+        return Math.max(len, (max - 1) * (n + 1) + count);
+    }
+}
+```
+
