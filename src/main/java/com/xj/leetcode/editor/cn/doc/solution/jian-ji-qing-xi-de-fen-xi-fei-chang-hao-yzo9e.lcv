@@ -1,0 +1,144 @@
+# 思路
+
+先对 `intervals` 排序，`intervals[i][0]` 小的靠前。
+
+设排序后的 `intervals` 为 `{[1, 10], [2, 5], [3, 11], [13, 14]}`。注意在假设时需使其包含多种情况。
+
+记返回的结果为 `ans`，初始 `ans = {[1, 10]}`。
+
+分析合并过程遇到的几种情况：
+1. `[1, 10]` 和 `[2, 5]` 合并为 `[1, 10]`。因为 `10 > 2 && 10 > 5`。
+2. `[1, 10]` 和 `[3, 11]` 合并为 `[1, 11]`。因为 `10 > 3 && 10 < 11`，合并后还需更新。
+3. `[1, 11]` 和 `[13, 14]` 不能合并，因为 `11 < 13`, 故添在结果尾部。`ans = {[1, 11], [13, 14]}`
+
+我们遍历 `intervals`，然后将其和 `ans` 中的最后一个比较即可。
+
+# 代码
+
+代码对思路稍作了改动，但也好懂。
+
+* []
+
+```C++
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        // 排序
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> ans;
+
+        for(int i = 0; i < intervals.size(); ++i) {
+            // ans 为空则直接添加
+            if(ans.empty()) ans.push_back(intervals[i]);
+            else {
+                int lastTo = ans.back()[1];
+                int from = intervals[i][0], to = intervals[i][1];
+                if(lastTo >= from) // 相交则更新 ans 中的 lastTo
+                    ans.back()[1] = max(lastTo, to);
+                else { // 不相交则添在尾部
+                    ans.push_back(intervals[i]);
+                }
+            }
+        }
+
+        return ans;
+    }
+};
+```
+
+* []
+
+```Python
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # 排序
+        intervals.sort(key=lambda x: x[0])
+        ans = []
+
+        for interval in intervals:
+            # ans 为空则直接添加
+            if not ans:
+                ans.append(interval)
+            else:
+                lastEnd = ans[-1][1]
+                start, end = interval
+                if lastEnd >= start: # 相交则更新 ans 中的 lastEnd
+                    ans[-1][1] = max(lastEnd, end)
+                else: # 不相交则添在尾部
+                    ans.append(interval)
+
+        return ans
+```
+
+* []
+
+```Java
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        // 排序
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        List<int[]> ans = new ArrayList<>();
+
+        for (int i = 0; i < intervals.length; i++) {
+            // ans 为空则直接添加
+            if (ans.isEmpty()) {
+                ans.add(intervals[i]);
+            } else {
+                int lastTo = ans.get(ans.size() - 1)[1];
+                int from = intervals[i][0], to = intervals[i][1];
+                if (lastTo >= from) // 相交则更新 ans 中的 lastTo
+                    ans.get(ans.size() - 1)[1] = Math.max(lastTo, to);
+                else { // 不相交则添在尾部
+                    ans.add(intervals[i]);
+                }
+            }
+        }
+
+        return ans.toArray(new int[ans.size()][]);
+    }
+}
+```
+
+* []
+
+```Kotlin
+class Solution {
+    fun merge(intervals: Array<IntArray>): Array<IntArray> {
+        // 排序
+        intervals.sortBy{ it.first() }
+        val ans = mutableListOf<IntArray>()
+
+        for(i in intervals.indices){
+            // ans 为空则直接添加
+            if(ans.none()) ans += intervals[i]
+            else {
+                val lastTo = ans.last()[1]
+                val (from, to) = intervals[i]
+                if(lastTo >= from) // 相交则更新 ans 中的 lastTo
+                    ans.last()[1] = max(lastTo, to)
+                else { // 不相交则添在尾部
+                    ans += intervals[i]
+                }
+            }
+        }
+
+        return ans.toTypedArray()
+    }
+}
+```
+
+# 复杂度
+
+考虑排序
+- 时间：$O(n\cdot log\ n)$
+- 空间：$O(n)$
+
+# 推广
+
+以下皆为个人所著，兼顾了职场面试和本硕阶段的学术考试。
+- [不同层次的面试算法学习规划](https://leetcode.cn/circle/discuss/xV68NV/)
+- [附个人题解的双指针题单](https://leetcode.cn/circle/discuss/BI95fj/)
+- [图论入门](https://leetcode.cn/leetbook/detail/introduction-to-graph/)
+- [图论进阶](https://leetcode.cn/leetbook/detail/advanced-graph-theory/)
+
+点赞关注不迷路。祝君早日上岸，飞黄腾达！
