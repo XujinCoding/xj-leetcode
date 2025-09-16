@@ -122,7 +122,7 @@ class P208_ImplementTriePrefixTree {
 
         Set<String>[] trie;
 
-        public Trie() {
+        public TrieTest() {
             this.trie = new HashSet[26];
             for (int i = 0; i < 26; i++) {
                 trie[i] = new HashSet<>();
