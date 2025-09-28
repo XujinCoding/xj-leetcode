@@ -454,6 +454,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/xj/leetcode/editor/cn/P461_HammingDistance .java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/src/main/java/com/xj/leetcode/editor/cn/doc/content/P461_HammingDistance .md" />
+              <option name="frontendQuestionId" value="leetcode.cn461" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/src/main/java/com/xj/leetcode/editor/cn/P461_HammingDistance .java" />
+              <option name="titleSlug" value="hamming-distance" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/xj/leetcode/editor/cn/P46_Permutations .java">
           <value>
             <LeetcodeEditor>
