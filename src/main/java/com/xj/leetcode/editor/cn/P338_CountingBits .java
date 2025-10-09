@@ -76,6 +76,21 @@ class P338_CountingBits {
     class Solution {
         public int[] countBits(int n) {
             int[] res = new int[n + 1];
+            res[0] = 0;
+
+            for (int i = 1; i <= n; i++) {
+                // 利用位运算特性：i & (i-1) 会去掉i的二进制表示中最右边的1
+                res[i] = res[i & (i - 1)] + 1;
+            }
+
+            return res;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    class SolutionTest {
+        public int[] countBits(int n) {
+            int[] res = new int[n + 1];
             int index = 1;
             res[0] = 0;
             while (n > 0) {
@@ -92,6 +107,4 @@ class P338_CountingBits {
             return res;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }
