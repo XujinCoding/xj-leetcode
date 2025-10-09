@@ -443,6 +443,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/xj/leetcode/editor/cn/P399_EvaluateDivision .java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/src/main/java/com/xj/leetcode/editor/cn/doc/content/P399_EvaluateDivision .md" />
+              <option name="frontendQuestionId" value="leetcode.cn399" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/src/main/java/com/xj/leetcode/editor/cn/P399_EvaluateDivision .java" />
+              <option name="titleSlug" value="evaluate-division" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/xj/leetcode/editor/cn/P39_CombinationSum .java">
           <value>
             <LeetcodeEditor>

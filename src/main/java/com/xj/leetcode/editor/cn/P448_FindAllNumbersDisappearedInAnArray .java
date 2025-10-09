@@ -33,6 +33,7 @@
 
 
 package com.xj.leetcode.editor.cn;
+
 import com.xj.leetcode.common.*;
 
 import java.util.ArrayList;
@@ -40,32 +41,52 @@ import java.util.List;
 
 /**
  * 找到所有数组中消失的数字
+ *
  * @author XuJ
  * @date 2025-10-09 13:21:23
  */
-class P448_FindAllNumbersDisappearedInAnArray{
-	 public static void main(String[] args) {
-	 	 //测试代码
-	 	 Solution solution = new P448_FindAllNumbersDisappearedInAnArray().new Solution();
-	 }
-	 
-//力扣代码
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public List<Integer> findDisappearedNumbers(int[] nums) {
-		int[] index = new int[nums.length+1];
-        for (int num : nums) {
-            index[num] = 1;
-        }
-		List<Integer> res = new ArrayList<>();
-		for (int i = 1; i < index.length ; i++) {
-			if (index[i] == 0){
-				res.add(i);
-			}
-		}
-		return res;
+class P448_FindAllNumbersDisappearedInAnArray {
+    public static void main(String[] args) {
+        //测试代码
+        Solution solution = new P448_FindAllNumbersDisappearedInAnArray().new Solution();
     }
-}
+
+    //力扣代码
+//leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<Integer> findDisappearedNumbers(int[] nums) {
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[Math.abs(nums[i]) - 1] > 0) {
+                    nums[Math.abs(nums[i]) - 1] = nums[Math.abs(nums[i]) - 1] * -1;
+                }
+            }
+
+            List<Integer> res = new ArrayList<>();
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] > 0) {
+                    res.add(i + 1);
+                }
+            }
+            return res;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
+
+    class SolutionTest {
+        public List<Integer> findDisappearedNumbers(int[] nums) {
+            int[] index = new int[nums.length + 1];
+            for (int num : nums) {
+                index[num] = 1;
+            }
+            List<Integer> res = new ArrayList<>();
+            for (int i = 1; i < index.length; i++) {
+                if (index[i] == 0) {
+                    res.add(i);
+                }
+            }
+            return res;
+        }
+    }
+
 
 }
